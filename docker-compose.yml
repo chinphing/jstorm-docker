@@ -3,6 +3,8 @@ services:
     zookeeper:
         image: zookeeper:3.4
         container_name: zookeeper
+        ports:
+            - 2181:2181
         restart: always
 
     nimbus:
@@ -18,7 +20,7 @@ services:
             - 6627:6627
 
     supervisor:
-        image: mtunique/jstorm
+        image: xing/jstorm:2.1.1-jdk8
         container_name: supervisor
         command: jstorm supervisor
         depends_on:
@@ -27,4 +29,36 @@ services:
         links:
             - nimbus
             - zookeeper
+        volumes:
+            - $PWD/data:/data
         restart: always
+
+    redis:
+        image: redis:4.0.11-alpine
+        container_name: redis
+        ports:
+            - 6379:6379
+
+    kafka:
+        image: bitnami/kafka:latest
+        container_name: kafka
+        ports:
+            - 9092:9092
+        environment:
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+            - ALLOW_PLAINTEXT_LISTENER=yes
+        hostname: kafka
+        depends_on:
+            - zookeeper
+        links:
+            - zookeeper
+        
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456 
+            - MYSQL_DATABASE=test

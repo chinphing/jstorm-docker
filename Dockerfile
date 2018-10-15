@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:18.04
 MAINTAINER mtunique <oatgnem@gmail.com>
 
 
@@ -11,7 +11,7 @@ ENV JSTORM_HOME $JSTORM_INSTALL_PATH/jstorm
 ENV PATH $PATH:$JSTORM_HOME/bin
 
 RUN apt-get update && \
-    apt-get install -y openjdk-7-jre-headless unzip wget python && \
+    apt-get install -y openjdk-8-jre-headless unzip wget python && \
     apt-get clean && \
     mkdir -p "${JSTORM_INSTALL_PATH}" && \
     wget "$JSTORM_URL" -O "$JSTORM_INSTALL_PATH/$JSTORM_FILE" && \
