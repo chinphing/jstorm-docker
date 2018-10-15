@@ -1,7 +1,10 @@
-Jstorm Docker
+Jstorm 完整的开发测试环境，包括Jstorm集群，以及redis， Mysql， Kafka
+
 ========
 
 ### Setting up a minimal Storm cluster
+Run `docker build -t xing/jstorm:2.1.1-jdk8 .`
+
 Run `docker-compose up`. The nimbus, supervisor and zookeeper will run. The nimbus will be available at port 6627.
 
 If you want to run the cluster in backend, you can run `docker-compose up -d`.
