@@ -3,7 +3,7 @@ MAINTAINER mtunique <oatgnem@gmail.com>
 
 
 # environment variables
-ARG JSTORM_VERSION=2.1.1
+ARG JSTORM_VERSION=2.2.1
 ARG JSTORM_FILE=jstorm-${JSTORM_VERSION}.zip
 ARG JSTORM_URL=https://github.com/alibaba/jstorm/releases/download/${JSTORM_VERSION}/${JSTORM_FILE}
 ARG JSTORM_INSTALL_PATH=/opt
